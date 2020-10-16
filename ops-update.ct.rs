@@ -109,14 +109,17 @@ fn check_git_ignore() {
     if !has_ignore {
         ct_info!("root .gitignore append '{}'", IGNORE);
         ct_check_fatal!(f.write_all(IGNORE.as_bytes()));
+        ct_check_fatal!(f.write_all(b"\n"));
     }
     if !has_ex_bootstrap {
         ct_info!("root .gitignore append '{}'", EX_BOOTSTRAP);
         ct_check_fatal!(f.write_all(EX_BOOTSTRAP.as_bytes()));
+        ct_check_fatal!(f.write_all(b"\n"));
     }
     if !has_ex_pin {
         ct_info!("root .gitignore append '{}'", EX_PIN);
         ct_check_fatal!(f.write_all(EX_PIN.as_bytes()));
+        ct_check_fatal!(f.write_all(b"\n"));
     }
 }
 
