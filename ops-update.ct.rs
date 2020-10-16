@@ -7,6 +7,20 @@ use std::path::Path;
 mod cargo_task_util;
 use cargo_task_util::*;
 
+/// entrypoint
+fn main() {
+    check_cargo_task_dir();
+    check_git_ignore();
+    check_ci_tasks();
+}
+
+/// Execute a git command.
+fn git<R: AsRef<std::ffi::OsStr>>(args: impl IntoIterator<Item = R>) -> bool {
+    let mut cmd = std::process::Command::new("git");
+    cmd.args(args);
+    cmd.spawn().unwrap().wait().unwrap().success()
+}
+
 /// see if the .cargo-task directory can be updated
 fn check_cargo_task_dir() {
     ct_info!("checking root .cargo-task");
@@ -22,7 +36,7 @@ fn check_cargo_task_dir() {
 
     let mut cmd = std::process::Command::new("git");
     let rev = cmd
-        .args(&["ls-remote", "file:///home/neonphog/tmp/hc-cargo-task", "main"])
+        .args(&["ls-remote", "https://github.com/holochain/common-cargo-tasks.git", "main"])
         .output()
         .unwrap();
     let rev = String::from_utf8_lossy(&rev.stdout);
@@ -49,13 +63,6 @@ fn check_cargo_task_dir() {
         ct_check_fatal!(ct_env().exec(cmd));
         std::process::exit(0);
     }
-}
-
-/// Execute a git command.
-fn git<R: AsRef<std::ffi::OsStr>>(args: impl IntoIterator<Item = R>) -> bool {
-    let mut cmd = std::process::Command::new("git");
-    cmd.args(args);
-    cmd.spawn().unwrap().wait().unwrap().success()
 }
 
 /// ensure we have certain directives in the root .gitignore
@@ -135,11 +142,4 @@ fn copy_dir<S: AsRef<Path>, D: AsRef<Path>>(src: S, dest: D) {
             }
         }
     }
-}
-
-/// entrypoint
-fn main() {
-    check_cargo_task_dir();
-    check_git_ignore();
-    check_ci_tasks();
 }

@@ -28,7 +28,7 @@ fn main() {
         // shallow git clone
         if !git(&[
             "clone",
-            "file:///home/neonphog/tmp/hc-cargo-task",
+            "https://github.com/holochain/common-cargo-tasks.git",
             "--depth=1",
             "--branch",
             "main",
