@@ -6,7 +6,5 @@
 @ct-task-deps@ fmt-check clippy test @@
 */
 
-mod cargo_task_util;
-
 fn main() {
 }

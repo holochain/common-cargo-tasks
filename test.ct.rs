@@ -2,7 +2,6 @@
 @ct-help@ Run "cargo test". @@
 */
 
-mod cargo_task_util;
 use cargo_task_util::*;
 
 fn main() {

@@ -4,7 +4,6 @@
 
 use std::path::Path;
 
-mod cargo_task_util;
 use cargo_task_util::*;
 
 /// entrypoint

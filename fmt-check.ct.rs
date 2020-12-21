@@ -2,7 +2,6 @@
 @ct-help@ Check cargo fmt lint/style. @@
 */
 
-mod cargo_task_util;
 use cargo_task_util::*;
 
 use std::process::Stdio;

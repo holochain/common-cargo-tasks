@@ -2,7 +2,6 @@
 @ct-help@ Run "cargo clippy" to check for lint. @@
 */
 
-mod cargo_task_util;
 use cargo_task_util::*;
 use std::process::Stdio;
 

@@ -11,7 +11,7 @@
 @ct-help@ Checkout/update the Holo common .cargo-task tasks. @@
 */
 
-mod cargo_task_util;
+use cargo_task_util::*;
 
 /// Execute a git command.
 fn git<R: AsRef<std::ffi::OsStr>>(args: impl IntoIterator<Item = R>) -> bool {
